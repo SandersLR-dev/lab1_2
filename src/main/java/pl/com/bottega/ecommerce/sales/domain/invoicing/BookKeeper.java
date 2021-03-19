@@ -23,11 +23,13 @@ public class BookKeeper {
 
     private InvoiceNew invoiceNew;
 
+    private InvoiceRequest invoiceRequest;
 
-    public Invoice issuance(ClientData client, List<RequestItem> items) {
-        Invoice invoice =  invoiceNew.create(Id.generate(), client);
 
-        for (RequestItem item : items) {
+    public Invoice issuance(InvoiceRequest invoiceRequest) {
+        Invoice invoice =  invoiceNew.create(Id.generate(), invoiceRequest.getClient());
+
+        for (RequestItem item : invoiceRequest.getItems()) {
             Money net = item.getTotalCost();
             BigDecimal ratio = null;
             String desc = null;
