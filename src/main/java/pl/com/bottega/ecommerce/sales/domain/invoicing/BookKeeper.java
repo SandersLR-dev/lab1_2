@@ -21,8 +21,11 @@ import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 public class BookKeeper {
 
+    private InvoiceNew invoiceNew;
+
+
     public Invoice issuance(ClientData client, List<RequestItem> items) {
-        Invoice invoice = new Invoice(Id.generate(), client);
+        Invoice invoice =  invoiceNew.create(Id.generate(), client);
 
         for (RequestItem item : items) {
             Money net = item.getTotalCost();
